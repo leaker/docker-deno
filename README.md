@@ -67,7 +67,7 @@ complete `Dockerfile`. In such cases, you can run a Deno script by using the
 Deno Docker image directly:
 
 ```console
-$ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/app -w /usr/src/app deno:latest deno your-script.ts
+$ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/app -w /usr/src/app deno:latest deno run your-script.ts
 ```
 
 ## License
