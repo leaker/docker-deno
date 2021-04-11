@@ -27,7 +27,6 @@ See: https://deno.land/
 ### Create a `Dockerfile` in your Deno app project
 
 ```dockerfile
-# specify the leaker/deno image with your desired version leaker/deno:<version>
 FROM leaker/deno:latest
 # replace this with your application's default port
 EXPOSE 6666
@@ -73,6 +72,6 @@ $ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/app -w /usr/sr
 
 ## License
 
-[License information](https://github.com/denoland/deno/blob/main/LICENSE) for
+[License information](https://github.com/denoland/deno/blob/main/LICENSE.md) for
 the software contained in this image. [License information](LICENSE) for the
 Deno Docker project.
