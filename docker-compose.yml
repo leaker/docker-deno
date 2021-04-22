@@ -1,0 +1,12 @@
+services:
+    v1.9.0:
+      image: leaker/deno:1.9.0
+      build: 1/1.9.0
+
+    v1.9.1:
+      image: leaker/deno:1.9.1
+      build: 1/1.9.1
+
+    latest:
+      extends: v1.9.1
+      image: leaker/deno:latest
