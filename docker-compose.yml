@@ -15,6 +15,10 @@ services:
       image: leaker/deno:1.10.1
       build: 1/1.10.1
 
+    v1.10.2:
+      image: leaker/deno:1.10.2
+      build: 1/1.10.2
+
     latest:
-      extends: v1.10.1
+      extends: v1.10.2
       image: leaker/deno:latest
