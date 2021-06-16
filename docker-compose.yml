@@ -1,32 +1,36 @@
 services:
-    v1.9.0:
-      image: leaker/deno:1.9.0
-      build: 1/1.9.0
+  latest:
+    extends: v1.11.1
+    image: leaker/deno:latest
 
-    v1.9.1:
-      image: leaker/deno:1.9.1
-      build: 1/1.9.1
+  v1.11.1:
+    image: leaker/deno:1.11.1
+    build: 1/1.11.1
 
-    v1.9.2:
-      image: leaker/deno:1.9.2
-      build: 1/1.9.2
+  v1.11.0:
+    image: leaker/deno:1.11.0
+    build: 1/1.11.0
 
-    v1.10.1:
-      image: leaker/deno:1.10.1
-      build: 1/1.10.1
+  v1.10.3:
+    image: leaker/deno:1.10.3
+    build: 1/1.10.3
 
-    v1.10.2:
-      image: leaker/deno:1.10.2
-      build: 1/1.10.2
+  v1.10.2:
+    image: leaker/deno:1.10.2
+    build: 1/1.10.2
 
-    v1.10.3:
-      image: leaker/deno:1.10.3
-      build: 1/1.10.3
+  v1.10.1:
+    image: leaker/deno:1.10.1
+    build: 1/1.10.1
 
-    v1.11.0:
-      image: leaker/deno:1.11.0
-      build: 1/1.11.0
+  v1.9.2:
+    image: leaker/deno:1.9.2
+    build: 1/1.9.2
 
-    latest:
-      extends: v1.11.0
-      image: leaker/deno:latest
+  v1.9.1:
+    image: leaker/deno:1.9.1
+    build: 1/1.9.1
+
+  v1.9.0:
+    image: leaker/deno:1.9.0
+    build: 1/1.9.0
