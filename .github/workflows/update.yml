@@ -16,7 +16,9 @@ jobs:
       - uses: actions/checkout@master
       - name: run update script
         id: step1
-        run: ./update.sh
+        run: |
+          chmod +x update.sh
+          ./update.sh
       - name: commit and push change
         if: ${{ steps.step1.outputs.updated == '1' }}
         env:
