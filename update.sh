@@ -24,6 +24,7 @@ ENTRYPOINT ["deno"]
 ' > $docker_path
   echo "::set-output name=updated::1"
   echo "::set-output name=dockerpath::$docker_folder"
+  echo "::set-output name=tag::$ver"
 }
 
 make_latest

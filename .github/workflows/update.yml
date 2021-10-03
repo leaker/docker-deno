@@ -13,6 +13,7 @@ jobs:
     outputs:
       updated: ${{ steps.makever.outputs.updated }}
       dockerpath: ${{ steps.makever.outputs.dockerpath }}
+      tag: ${{ steps.makever.outputs.tag }}
     steps:
       - uses: actions/checkout@master
 
@@ -35,6 +36,12 @@ jobs:
         uses: docker/metadata-action@master
         with:
           images: leaker/deno
+          flavor: |
+            latest=true
+            prefix=
+            suffix=
+          tags: |
+            type=semver,pattern=${{ steps.makever.outputs.tag }}
 
       - name: Build and push Docker image
         if: success() && steps.makever.outputs.updated == '1'
