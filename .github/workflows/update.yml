@@ -34,7 +34,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@master
         with:
-          images: my-docker-hub-namespace/my-docker-hub-repository
+          images: leaker/deno
 
       - name: Build and push Docker image
         if: success() && steps.makever.outputs.updated == '1'
