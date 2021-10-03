@@ -23,7 +23,7 @@ RUN curl -fsSL https://deno.land/x/install/install.sh | sh -s '$ver'
 ENTRYPOINT ["deno"]
 ' > $docker_path
   echo "::set-output name=updated::1"
-  echo "::set-output name=dockerfile::$docker_path"
+  echo "::set-output name=dockerpath::$docker_folder"
 }
 
 make_latest
