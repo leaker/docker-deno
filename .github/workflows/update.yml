@@ -19,8 +19,9 @@ jobs:
         run: |
           chmod +x update.sh
           ./update.sh
+      - run: echo ${{ steps.step1.outputs.updated }}
       - name: commit and push change
-        if: ${{ steps.step1.outputs.updated == '1' }}
+        if: steps.step1.outputs.updated == '1'
         env:
           GITHUB_EMAIL: ${{ secrets.EMAIL }}
           GITHUB_LOGIN: ${{ secrets.LOGIN }}
