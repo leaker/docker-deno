@@ -41,24 +41,24 @@ jobs:
           tags: |
             type=semver,pattern={{version}},value=${{ steps.makever.outputs.tag }}
 
-      # - name: Build and push Docker image
-      #   if: success() && steps.makever.outputs.updated == '1'
-      #   uses: docker/build-push-action@master
-      #   with:
-      #     context: ${{ steps.makever.outputs.dockerpath }}
-      #     push: true
-      #     tags: ${{ steps.meta.outputs.tags }}
-      #     labels: ${{ steps.meta.outputs.labels }}
+      - name: Build and push Docker image
+        if: success() && steps.makever.outputs.updated == '1'
+        uses: docker/build-push-action@master
+        with:
+          context: ${{ steps.makever.outputs.dockerpath }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
-      # - name: commit and push change
-      #   if: success() && steps.makever.outputs.updated == '1'
-      #   env:
-      #     GITHUB_EMAIL: ${{ secrets.EMAIL }}
-      #     GITHUB_LOGIN: ${{ secrets.LOGIN }}
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     git config --global user.name "$GITHUB_LOGIN"
-      #     git config --global user.email "$GITHUB_EMAIL"
-      #     git add .
-      #     git commit -m "Update from Github Action"
-      #     git push https://$GITHUB_LOGIN:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
+      - name: commit and push change
+        if: success() && steps.makever.outputs.updated == '1'
+        env:
+          GITHUB_EMAIL: ${{ secrets.EMAIL }}
+          GITHUB_LOGIN: ${{ secrets.LOGIN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "$GITHUB_LOGIN"
+          git config --global user.email "$GITHUB_EMAIL"
+          git add .
+          git commit -m "Update from Github Action"
+          git push https://$GITHUB_LOGIN:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
