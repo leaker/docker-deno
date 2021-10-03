@@ -14,12 +14,13 @@ jobs:
       updated: ${{ steps.step1.outputs.updated }}
     steps:
       - uses: actions/checkout@master
+
       - name: run update script
         id: step1
         run: |
           chmod +x update.sh
           ./update.sh
-      - run: echo ${{ steps.step1.outputs.updated }}
+
       - name: commit and push change
         if: steps.step1.outputs.updated == '1'
         env:
@@ -32,3 +33,26 @@ jobs:
           git add .
           git commit -m "Update from Github Action"
           git push https://$GITHUB_LOGIN:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
+
+      - name: Log in to Docker Hub
+        if: steps.step1.outputs.updated == '1'
+        uses: docker/login-action@master
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        if: steps.step1.outputs.updated == '1'
+        id: meta
+        uses: docker/metadata-action@master
+        with:
+          images: my-docker-hub-namespace/my-docker-hub-repository
+
+      - name: Build and push Docker image
+        if: steps.step1.outputs.updated == '1'
+        uses: docker/build-push-action@master
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
