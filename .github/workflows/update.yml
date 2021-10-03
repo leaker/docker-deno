@@ -1,0 +1,31 @@
+name: update
+
+# daily job
+on:
+  schedule:
+    - cron: 0 0 * * *
+  workflow_dispatch:
+    
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      updated: ${{ steps.step1.outputs.updated }}
+    steps:
+      - uses: actions/checkout@master
+      - name: run update script
+        id: step1
+        run: ./update.sh
+      - name: commit and push change
+        if: ${{ steps.step1.outputs.updated == '1' }}
+        env:
+          GITHUB_EMAIL: ${{ secrets.EMAIL }}
+          GITHUB_LOGIN: ${{ secrets.LOGIN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "$GITHUB_LOGIN"
+          git config --global user.email "$GITHUB_EMAIL"
+          git add .
+          git commit -m "Update from Github Action"
+          git push https://$GITHUB_LOGIN:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
