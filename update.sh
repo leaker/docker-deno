@@ -2,7 +2,7 @@
 function make_latest() {
   local ver=`curl -s https://api.github.com/repos/denoland/deno/releases/latest | grep "tag_name" | head -n 1 | awk -F ":" '{print $2}' | sed 's/\"//g;s/,//g;s/ //g'`
   # echo "last version: $ver"
-  local version_root=`echo $ver | grep -Eo "[0-9]+" | head -n 1`
+  local version_root=`echo $ver | grep -Eo "v[0-9]+" | head -n 1`
   # echo "root: ${version_root}"
   local docker_folder="${version_root}/$ver"
   # echo "docker_folder: $docker_folder"
@@ -23,6 +23,7 @@ RUN curl -fsSL https://deno.land/x/install/install.sh | sh -s '$ver'
 ENTRYPOINT ["deno"]
 ' > $docker_path
   echo "::set-output name=updated::1"
+  echo "::set-output name=dockerfile::$docker_path"
 }
 
 make_latest
