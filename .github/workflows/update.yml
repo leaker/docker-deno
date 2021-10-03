@@ -39,9 +39,7 @@ jobs:
           flavor: |
             latest=true
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern=${{ steps.makever.outputs.tag }}
+            type=schedule,pattern={{version}},value=${{ steps.makever.outputs.tag }}
 
       # - name: Build and push Docker image
       #   if: success() && steps.makever.outputs.updated == '1'
